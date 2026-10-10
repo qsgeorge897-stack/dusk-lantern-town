@@ -1,0 +1,9 @@
+node_modules/
+.git/
+.openai/
+.env
+.env.*
+*.log
+.DS_Store
+screenshots/
+save-backups/

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#172b28"><meta name="description" content="暮灯镇：种下庄稼，点亮墓园，替亡者完成心愿。一段可亲手游玩的庄园故事。">
+  <title>暮灯镇 · 封存库的回声</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23172b28'/%3E%3Cpath d='M15 11V7h10v4M12 13h16v20H12z' fill='none' stroke='%23e8be76' stroke-width='3'/%3E%3Cpath d='M20 17l4 10h-8z' fill='%23e8be76'/%3E%3C/svg%3E"><link rel="stylesheet" href="./style.css?v=0.13.3">
+</head>
+<body>
+  <!-- THESIS: 庄园始终是主画面，物品与人物对话属于同一个像素游戏世界。
+  OWN-WORLD: 暖棕木框、旧铜边角、浅黄纸面、彩色像素物品，中文保持清晰。
+  STORY: 选择真实库存里的种子，照料作物，走到人物与工作台推进心愿。
+  FIRST VIEWPORT: 右上紧凑日期与体力，左上手记入口，底部十格物品栏；对话占下方横框。
+  FORM: 用户已批准的星露谷/守墓人公开界面参考；直接修改现有游戏。signature: 快捷格和背包共享库存，人物交谈时保留清晰场景。
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance -->
+  <main id="game" aria-label="暮灯镇游戏">
+    <canvas id="world" aria-label="庄园地图，使用 WASD 移动，E 交互，也可点击地面和物件" tabindex="0"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <header class="top-left panel-dark">
+      <div class="day-row"><span id="weather-icon"></span><strong id="date">秋 1 日</strong><span class="dot">·</span><span id="weather">晴</span><time id="time">09:00</time></div>
+      <div class="vital-row"><span class="leaf-icon" id="energy-icon"></span><div class="energy-track" role="progressbar" aria-label="体力" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="energy-fill"></div></div><span id="energy">100 / 100</span><span class="coin-icon" aria-label="金币"></span><strong id="coins">40</strong></div>
+    </header>
+    <nav class="top-actions" aria-label="游戏菜单">
+      <button id="journal-button" class="square-button" aria-label="打开手记" title="手记 J"></button>
+      <button id="bag-button" class="square-button" aria-label="打开背包" title="背包 B"></button>
+      <button id="map-button" class="square-button" aria-label="打开区域图" title="区域图 M">⌘<kbd>M</kbd></button>
+      <button id="settings-button" class="square-button" aria-label="设置与存档" title="设置与存档"></button>
+    </nav>
+    <button id="quest-pin" class="quest-pin" aria-label="查看当前心愿"><span class="quest-mark">!</span><span id="quest-title"></span><kbd>J</kbd></button>
+    <div class="location-chip"><span class="location-dot"></span><span id="region-name">暮灯庄园</span> <span class="location-sub">/ 秋日来信</span></div>
+    <div id="interaction-hint" hidden data-kind="idle"><kbd>E</kbd><span id="interaction-category"></span><span class="interaction-copy"><strong id="interaction-text"></strong><small id="interaction-detail"></small></span></div>
+    <div id="toasts" aria-live="polite"></div>
+    <div class="bottom-controls">
+      <div id="held-item" class="held-item" aria-live="polite"></div>
+      <nav id="quickbar" class="hotbar wood-frame" aria-label="物品快捷栏"></nav>
+      <p class="control-note">WASD 移动 · 点击交互 · 1–0 / 滚轮选物品 · B 背包 · J 手记 · M 区域图</p>
+    </div>
+    <button id="help-button" class="help-button" aria-label="玩法帮助">?</button><span id="save-status">已自动保存</span>
+    <div class="touch-pad" aria-label="触屏移动"><button data-key="ArrowUp" aria-label="向上">↑</button><button data-key="ArrowLeft" aria-label="向左">←</button><button data-key="ArrowDown" aria-label="向下">↓</button><button data-key="ArrowRight" aria-label="向右">→</button></div>
+    <button id="touch-interact" class="touch-interact" aria-label="与附近目标交互">交互</button>
+    <div id="loading"><span class="loading-lantern"></span><h2>暮灯镇</h2><p id="loading-text">正在点亮庄园里的灯……</p></div>
+    <div id="modal-overlay" class="hidden"><section id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button id="modal-close" class="modal-close" aria-label="关闭窗口">×</button><div id="modal-body"></div></section></div>
+    <input id="import-file" type="file" accept="application/json,.json" hidden>
+  </main>
+  <script type="module" src="./app.js?v=0.13.3"></script>
+</body>
+</html>
